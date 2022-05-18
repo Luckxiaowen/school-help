@@ -1,0 +1,52 @@
+<header xmlns:th="http://www.thymeleaf.org">
+    <div class="layui-fluid" th:fragment="nav (index)">
+        <input type="hidden" id="val" th:value="${index}">
+        <ul class="layui-nav" lay-filter="">
+            <div class="logo">
+                <img th:src="@{/img/logo.jpg}" alt="">
+            </div>
+
+            <div class="item">
+                <li class="layui-nav-item"><a th:href="@{/}">首页</a></li>
+                <li class="layui-nav-item"><a th:href="@{/task/list}">跑腿列表</a></li>
+                <li class="layui-nav-item"><a href="goods.html">二手商品</a></li>
+                <li class="layui-nav-item"><a href="release.html">发布</a></li>
+                <li class="layui-nav-item"><a th:href="@{/user/personal}">个人中心</a></li>
+            </div>
+            <div class="login" th:if="${session.get('username') == null}">
+                <li class="layui-nav-item"><a href="/login">登录</a></li>
+                <li class="layui-nav-item"><a href="register.html">注册</a></li>
+            </div>
+            <div th:if="${session.get('username') != null}" style="display: flex;align-items: center;">
+
+                <div class="layui-btn layui-btn-primary" id="demo4" style="display: flex">
+                    <i class="layui-icon layui-icon-user"></i> <p th:text="${session.get('username')}"></p>
+                </div>
+            </div>
+        </ul>
+        <script>
+            let val = document.querySelector('#val').value
+            let li = document.getElementsByClassName('layui-nav')[0].getElementsByClassName('layui-nav-item')
+            li[val].classList.add('layui-this')
+            layui.use('dropdown',function () {
+                var dropdown = layui.dropdown
+                //自定义事件 - hover
+                dropdown.render({
+                    elem: '#demo4'
+                    ,trigger: 'hover'
+                    ,data: [{
+                        title: '个人中心',
+                        id: 100,
+                        href:'/user/personal'
+                    },{
+                        title: '注销',
+                        id: 101,
+                        href: '/user/logout'
+                    }]
+                });
+            })
+        </script>
+    </div>
+
+
+</header>

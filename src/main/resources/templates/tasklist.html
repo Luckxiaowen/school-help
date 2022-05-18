@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务列表</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/tasklist.css}">
+</head>
+
+<body>
+<div th:replace="nav::nav (index=${1})"></div>
+
+    <div class="layui-carousel" id="lbt">
+        <div carousel-item>
+            <div><img th:src="@{/img/93123189.jpg}" alt=""></div>
+            <div><img th:src="@{/img/93123189.jpg}" alt=""></div>
+        </div>
+    </div>
+
+    <div class="layui-container">
+        <ul class="layui-nav" lay-filter="">
+            <li class="layui-nav-item "><a th:href="@{/task/list}">全部</a></li>
+            <li class="layui-nav-item" th:each="tc : ${taskClass}">
+                <a th:href="@{'/task/list?classId=' + ${tc.getId()}}" th:text="${tc.getClassifyName()}"></a>
+            </li>
+        </ul>
+
+        <div class="layui-panel">
+            <div style="padding: 25px;" th:each="task : ${taskList}">
+                <div class="layui-row item">
+                    <div class="layui-col-md3 img">
+                        <img th:src="${task.getCoverUrl()}" alt="">
+                    </div>
+                    <div class="layui-col-md8 info">
+                        
+                            <h1 th:text="${task.getTaskName()}"></h1>
+                            <div style="display: flex;align-items: center;">
+                                <p style="margin-right: 10px;" th:text="'时间: ' + ${task.getCreateTime()}"></p>
+                                <p th:text="'地点: ' + ${task.getTaskPlace()}"></p>
+                            </div>
+
+                            <h3>金额: <span style="color: brown;" th:text="${task.getTaskMoney()}"></span></h3>
+                            <p th:text="'发布人: ' + ${task.getReleaseUserName()}"></p>
+                        
+                    </div>
+                    <div class="layui-col-md1">
+                        <a th:href="@{'/task/info/' + ${task.getId()}}" class="layui-btn" type="button">查看任务</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#lbt',
+                width: '100%' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+    </script>
+</body>
+
+</html>

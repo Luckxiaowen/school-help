@@ -1,0 +1,12 @@
+.layui-form-label{
+    text-align: center;
+}
+.layui-input-block {
+    margin-left: 80px;
+}
+.layui-form-item .layui-input-inline{
+    width: 60%;
+}
+.layui-container{
+    padding: 0 190px;
+}

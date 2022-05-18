@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+<!--    <div th:include="/nav"></div>-->
+
+    <div th:replace="nav::nav (index=${0})"></div>
+
+    <div class="layui-carousel" id="lbt">
+        <div carousel-item>
+            <div><img src="img/93123189.jpg" alt=""></div>
+            <div><img src="img/93123189.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <div class="layui-container">
+        <h1>最新跑腿任务</h1>
+        <div class="layui-row pt">
+
+            <div class="layui-col-md3 item" th:each="t : ${taskList}">
+                <a th:href="@{'/task/info/' + ${t.getId()}}">
+                    <img th:src="${t.getCoverUrl()}" alt="">
+                </a>
+                <div style="padding-top:10px;">
+                    <h3>任务名称: <span th:text="${t.getTaskName()}"></span></h3>
+                    <h3>任务金额: <span th:text="${t.getTaskMoney()}"> 5</span>元</h3>
+                    <h3>发布时间:<span th:text="${t.getCreateTime()}">2022-5-13 20:12:24</span></h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="layui-container" style="margin-top: 40px;">
+        <h1>最新二手商品</h1>
+        <a href="#" class="layui-row pt">
+            <div class="layui-col-md3 item">
+                <img src="img/93123189.jpg" alt="">
+                <h4>名称：XX&nbsp;&nbsp;价格：XXXX</h4>
+            </div>
+            <div class="layui-col-md3 item">
+                <img src="img/93123189.jpg" alt="">
+                <h4>名称：XX&nbsp;&nbsp;价格：XXXX</h4>
+            </div>
+            <div class="layui-col-md3 item">
+                <img src="img/93123189.jpg" alt="">
+                <h4>名称：XX&nbsp;&nbsp;价格：XXXX</h4>
+            </div>
+            <div class="layui-col-md3 item">
+                <img src="img/93123189.jpg" alt="">
+                <h4>名称：XX&nbsp;&nbsp;价格：XXXX</h4>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#lbt',
+                width: '100%' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+    </script>
+</body>
+
+</html>

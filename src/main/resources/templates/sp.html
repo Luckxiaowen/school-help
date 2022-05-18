@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="./css/tasklist.css">
+    <style>
+        .layui-elem-field {
+            border-width: 7px 0 0;
+            border-color: rgb(48, 186, 138);
+        }
+        .layui-container {
+            margin: 60px auto;
+        }
+        .layui-btn {
+            float: right;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="layui-fluid">
+            <ul class="layui-nav" lay-filter="">
+                <div class="logo">
+                    <img src="img/logo.jpg" alt="">
+                </div>
+
+                <div class="item">
+                    <li class="layui-nav-item"><a href="index.html">首页</a></li>
+                    <li class="layui-nav-item"><a href="tasklist.html">跑腿列表</a></li>
+                    <li class="layui-nav-item layui-this"><a href="goods.html">二手商品</a></li>
+                    <li class="layui-nav-item"><a href="release.html">发布</a></li>
+                    <li class="layui-nav-item"><a href="me.html">个人中心</a></li>
+                </div>
+                <div class="login">
+                    <li class="layui-nav-item"><a href="login.html">登录</a></li>
+                    <li class="layui-nav-item"><a href="register.html">注册</a></li>
+                </div>
+            </ul>
+        </div>
+    </header>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md6">
+                <img src="img/93123189.jpg" alt="" width="500px">
+            </div>
+            <div class="layui-col-md6">
+                <fieldset class="layui-elem-field layui-field-title">
+                    <legend style="font-size:35px;">二手商品名称</legend>
+                    <div class="layui-field-box">
+                        <h3>卖家名:XXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>上传时间:XXXX-XXX-XXX</span></h3><br>
+                        <h3>商品详情：</h3>
+                        <p>XXXXXXXXXXXXXX-XXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXX-XXXXXXXXXXXXXXXXXXXXXXXXXXXX-XXX-XXXXXXXXXXXXXX
+                        </p><br>
+                        <h3>价格：XXXX&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>联系方式:XXX-XXXX-XXXX</span></h3>
+                        <button type="button" class="layui-btn">我要购买</button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function () {
+            var element = layui.element;
+
+            //…
+        });
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#lbt',
+                width: '100%' //设置容器宽度
+                ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+</head>
+
+<body>
+<div th:replace="nav::nav (index=${4})"></div>
+
+    <div class="layui-container" style="margin-top: 20px;">
+        <div class="layui-row">
+            <div class="layui-col-md3 left">
+                <div class="head">
+                    <img src="./img/93123189.jpg" alt="">
+                </div>
+                <ul>
+                    <li class="active"><a th:href="@{/user/personal}">个人信息</a></li>
+                    <li><a th:href="@{/user/order}">我的订单</a></li>
+                    <li><a th:href="@{/user/release}">我的发布</a></li>
+                </ul>
+            </div>
+            <div class="layui-col-md9 right">
+                <form class="layui-form layui-form-pane" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">账号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" th:value="${user.getUsername()}" readonly="readonly" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" th:value="${user.getNickName()}" readonly="readonly" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" value="成都职业技术学院" readonly="readonly" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" th:value="${user.getTel()}" readonly="readonly" autocomplete="off"
+                                class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-btn">
+                            修改信息
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <script>
+            //注意：导航 依赖 element 模块，否则无法进行功能性操作
+            layui.use('element', function () {
+                var element = layui.element;
+
+                //…
+            });
+            layui.use('carousel', function () {
+                var carousel = layui.carousel;
+                //建造实例
+                carousel.render({
+                    elem: '#lbt',
+                    width: '100%' //设置容器宽度
+                        ,
+                    arrow: 'always' //始终显示箭头
+                    //,anim: 'updown' //切换动画方式
+                });
+            });
+        </script>
+</body>
+
+</html>

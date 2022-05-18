@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <script th:src="@{/layui/layui.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/me.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+
+<body>
+<div th:replace="nav::nav (index=${5})"></div>
+
+    <div class="layui-container" style="margin-top: 60px;">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                  <button type="reset" class="layui-btn layui-btn-primary">注册</button>
+                </div>
+              </div>
+        </form>
+    </div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <script>
+        //Demo
+        layui.use(['form','layer'], function () {
+            var form = layui.form;
+            var layer = layui.layer;
+
+
+            //监听提交
+            form.on('submit(formDemo)', function (data) {
+
+               axios.post("/user/login",{"username":data.field.username,"password":data.field.password})
+                .then(res=>{
+                    if (res.data.code == 200){
+                        layer.msg(res.data.msg, {icon:6,time: 1000},function () {
+                            window.location = '/index'
+                        });
+                    }else {
+                        layer.msg(res.data.msg,{icon:5,time:500,anim:6})
+                    }
+                })
+
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
